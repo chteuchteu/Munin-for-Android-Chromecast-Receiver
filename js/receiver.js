@@ -86,7 +86,7 @@ $(document).ready(function() {
                 'masterName': 'munin-monitoring.org'},
             {'graphUrl': 'http://demo.munin-monitoring.org/munin-cgi/munin-cgi-graph/munin-monitoring.org/demo.munin-monitoring.org/multicpu1sec-{period}.png',
                 'pluginName': 'CPU usage', 'serverName': 'demo.munin-monitoring.org', 'x': '2', 'y': '0',
-                'masterName': 'demo.munin-monitoring.org'},
+                'masterName': 'munin-monitoring.org'},
             {'graphUrl': 'http://demo.munin-monitoring.org/munin-cgi/munin-cgi-graph/munin-monitoring.org/demo.munin-monitoring.org/multicpu1sec-{period}.png',
                 'pluginName': 'multicpu1sec', 'serverName': 'demo.munin-monitoring.org', 'x': '0', 'y': '1',
                 'masterName': 'munin-monitoring.org'},
@@ -101,9 +101,6 @@ $(document).ready(function() {
                 'masterName': 'munin-monitoring.org'},
             {'graphUrl': 'http://demo.munin-monitoring.org/munin-cgi/munin-cgi-graph/munin-monitoring.org/demo.munin-monitoring.org/multicpu1sec-{period}.png',
                 'pluginName': 'multicpu1sec', 'serverName': 'demo.munin-monitoring.org', 'x': '3', 'y': '0',
-                'masterName': 'munin-monitoring.org'},
-            {'graphUrl': 'http://demo.munin-monitoring.org/munin-cgi/munin-cgi-graph/munin-monitoring.org/demo.munin-monitoring.org/multicpu1sec-{period}.png',
-                'pluginName': 'multicpu1sec', 'serverName': 'demo.munin-monitoring.org', 'x': '4', 'y': '0',
                 'masterName': 'munin-monitoring.org'}
         ];
 
@@ -175,6 +172,30 @@ function inflateGridItems() {
         gridsContainer.append('<div class="gridItemsRow">' + rowHtml + '</div>');
     }
 
+    // Check if we should hide server / master name
+    var serverNames = $('.serverName');
+    var masterNames = $('.masterName');
+    var bullets = $('.bullet');
+    var infosContainer = $('.gridItem_serverName');
+    var hideServerName = shouldHideServerName(window.gridItems);
+    var hideMasterName = shouldHideMasterName(window.gridItems);
+
+    if (hideServerName)   serverNames.hide();
+    else                  serverNames.show();
+
+    if (hideMasterName)   masterNames.hide();
+    else                  masterNames.show();
+
+    if (!hideServerName && !hideMasterName)
+        bullets.show();
+    else
+        bullets.hide();
+
+    if (hideServerName && hideMasterName)
+        infosContainer.hide();
+    else
+        infosContainer.show();
+
     fluidGrid();
 }
 
@@ -197,7 +218,11 @@ function getGridItemHtml(gridItem) {
             '        </div>' +
             '        <div class="gridItemInfos">' +
             '            <div class="gridItem_pluginName">' + gridItem.pluginName + '</div>' +
-            '            <div class="gridItem_serverName">' + gridItem.masterName + ' &bullet; ' + gridItem.serverName + '</div>' +
+            '            <div class="gridItem_serverName">' +
+            '               <span class="masterName">' + gridItem.masterName + '</span>' +
+            '               <span class="bullet"> &bullet; </span>' +
+            '               <span class="serverName">' + gridItem.serverName + '</span>' +
+            '            </div>' +
             '       </div>' +
             '   </div>' +
             '</div>';

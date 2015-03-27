@@ -63,3 +63,33 @@ function getPeriod(period) {
         default: return PeriodEnum.DAY; break;
     }
 }
+
+function shouldHideServerName(gridItems) {
+    var firstServerName = '';
+
+    for (var z=0; z<gridItems.length; z++) {
+        var gridItem = window.gridItems[z];
+
+        if (firstServerName == '')
+            firstServerName = gridItem.serverName;
+
+        if (firstServerName != gridItem.serverName)
+            return false;
+    }
+    return true;
+}
+
+function shouldHideMasterName(gridItems) {
+    var firstMasterName = '';
+
+    for (var z=0; z<gridItems.length; z++) {
+        var gridItem = window.gridItems[z];
+
+        if (firstMasterName == '')
+            firstMasterName = gridItem.masterName;
+
+        if (firstMasterName != gridItem.masterName)
+            return false;
+    }
+    return true;
+}
