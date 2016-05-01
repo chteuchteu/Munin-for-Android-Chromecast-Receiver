@@ -1,6 +1,8 @@
 # Munin for Android Chromecast Receiver
 This is the Git repository for the Chromecast receiver app of Munin for Android Chromecast feature.
 
+This project's public page URL is https://chteuchteu.github.io/Munin-for-Android-Chromecast-Receiver/.
+
 ## Installation
 If you want to run your own Chromecast Receiver app, here's how to:
 *(in order to run your own application, you'll have to pay a $5 fee to Google when creating a developer account)*
