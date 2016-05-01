@@ -388,7 +388,7 @@ var PeriodEnum = {
 $(document).ready(function() {
     var r = new window.ChromecastReceiver({
         chromecast: true,
-        debug: true
+        debug: false
     });
 
     if (!r.settings.chromecast) {
